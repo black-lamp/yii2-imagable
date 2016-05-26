@@ -1,0 +1,21 @@
+{
+  "name": "black-lamp/yii2-imagable",
+  "description": "Image saving extension for yii2",
+  "keywords": ["yii2", "image", "save", "thumbnail"],
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "Gutsulyak Vadim",
+      "email": "guts.vadim@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": ">=2.0.4",
+    "yiisoft/yii2-imagine": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "bl\\imagable\\": ""
+    }
+  }
+}
