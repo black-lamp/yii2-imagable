@@ -9,6 +9,14 @@
       "email": "guts.vadim@gmail.com"
     }
   ],
+  
+  "repositories":[
+    {
+        "type": "git",
+        "url": "https://github.com/black-lamp/yii2-imagable"
+    }
+  ]
+  
   "require": {
     "yiisoft/yii2": ">=2.0.4",
     "yiisoft/yii2-imagine": "^2.0"
