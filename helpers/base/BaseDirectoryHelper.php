@@ -1,6 +1,6 @@
 <?php
 
-namespace bl\imagable\helpers;
+namespace bl\imagable\helpers\base;
 
 /**
  * BaseDirectoryHelper provides concrete implementation for [[DirectoryHelper]].
@@ -19,7 +19,6 @@ class BaseDirectoryHelper
      */
     public static function exist($path)
     {
-        \yii\helpers\ArrayHelper::getValue($array, $path);
         return isset($path) && file_exists($path);
     }
 
@@ -31,7 +30,7 @@ class BaseDirectoryHelper
      * @param bool $force force directory creation
      * @return bool return true if directory created else returned false
      */
-    public static function create($path, $recursive, $force = false,
+    public static function create($path, $recursive = false, $force = false,
             $mode = 0777)
     {
         $force && self::remove($path);

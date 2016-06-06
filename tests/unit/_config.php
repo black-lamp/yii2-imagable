@@ -8,7 +8,9 @@ return [
     'bootstrap' => [],
     'components' => [
         'imagable' => [
-            'class' => 'bl\imagable\Imagable'
+            'class' => 'bl\imagable\Imagable',
+            'imagesPath' => '@tests/_data/images',
+            'imageClass' => 'bl\imagable\instances\CreateImageImagine',
         ],
         'db' => [
             'class' => '\yii\db\Connection',

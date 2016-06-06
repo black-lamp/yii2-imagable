@@ -36,6 +36,7 @@ class DirectoryHelperTest extends \yii\codeception\TestCase
     protected function _after()
     {
         $path = &$this->path;
+
         if (file_exists($path)) {
             rmdir($path);
         }
