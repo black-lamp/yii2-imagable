@@ -61,23 +61,24 @@ class CreateImageBehavior extends Behavior
         //new image name created with class BaseName
         $imageName = $this->name->getName(FileHelper::getFileName($path));
         DirectoryHelper::create($newPath, true);
-        //TODO:make size creator
-        $image = '';
 
+        $image = '';
+        //TODO:refactor here!
         foreach ($categoriesParam['category'] as $category) {
             if (isset($category['origin']) && $category['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
                 copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+
             } elseif (isset($categoriesParam['origin']) && $categoriesParam['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
                 copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
             }
+
             $arr = isset($category['size']) ? array_merge($defaultCategoriesSize, $category['size']) : $defaultCategoriesSize;
             foreach ($arr as $sizeName => $size) {
                 $image = $imageName . "-$sizeName." . FileHelper::getFileType($path);
                 $this->imageCreator->thumbnail($path, $size['width'], $size['height']);
                 $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-//                    copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
             }
         }
 
