@@ -34,10 +34,12 @@ class ImagableTest extends \yii\codeception\TestCase
 
     public function testImagableCreate()
     {
+        $nameClass = new CRC32Name();
+
         $imagable = \Yii::createObject([
             'class' => 'bl\imagable\Imagable',
             'imagesPath' => '@tests/_data/images',
-//            'nameClass' => CRC32Name::className(),
+            'nameClass' => $nameClass->className(),
             'categories' => [
                 'origin' => true,
                 'category' => [
@@ -57,6 +59,7 @@ class ImagableTest extends \yii\codeception\TestCase
         $path = \Yii::getAlias($this->pathToOrigin);
         $path = implode(DIRECTORY_SEPARATOR, [$path, 'testImage.jpg']);
         $name = 'testImage';
+        $name = $nameClass->generate($name);
         //return name
         $this->assertEquals($imagable->create('galery', $path), $name);
 
@@ -68,15 +71,17 @@ class ImagableTest extends \yii\codeception\TestCase
 
     public function testImagableGet()
     {
+        $nameClass = new CRC32Name();
         $imagable = \Yii::createObject([
             'class' => 'bl\imagable\Imagable',
             'imagesPath' => '@tests/_data/images',
-            //'nameClass' => CRC32Name::className(),
+            'nameClass' => $nameClass->className(),
             'imageClass' => 'bl\imagable\instances\CreateImageImagine',
         ]);
 
         //image name
         $name = 'testImage';
+        $name = $nameClass->getName($name);
         $path = &$this->path;
         $pathToGalery = implode(DIRECTORY_SEPARATOR, [$path, 'galery']);
         $pathToGalery = FileHelper::normalizePath(\Yii::getAlias($pathToGalery));
@@ -89,8 +94,9 @@ class ImagableTest extends \yii\codeception\TestCase
             $pathToGalery . \DIRECTORY_SEPARATOR . $name . '-small.jpg');
 
         //return full path. Example: /var/www/site/images/galery/5cc22de8-big.jpg
+        $stream = null;
         $this->assertEquals($imagable->getBig('galery', $name), $pathToGalery . \DIRECTORY_SEPARATOR . $name . '-big.jpg');
-\Codeception\Util\Debug::debug($imagable->getOriginal('galery', $name));
+//        \Codeception\Util\Debug::debug($imagable->getOriginal('galery', $name, $stream));
         //return full path. Example: /var/www/site/images/galery/5cc22de8-original.jpg
         $this->assertEquals($imagable->getOriginal('galery', $name), $pathToGalery . \DIRECTORY_SEPARATOR . $name . '-origin.jpg');
 

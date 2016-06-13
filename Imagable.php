@@ -10,11 +10,11 @@ use yii\base\Component;
  *
  * @method create($category, $path)
  *
- * @method get($category, $type, $name)
- * @method getThumb($category, $name)
- * @method getSmall($category, $name)
- * @method getBig($category, $name)
- * @method getOriginal($category, $name)
+ * @method get($category, $type, $name, &$imageContent = null)
+ * @method getThumb($category, $name, &$imageContent = null)
+ * @method getSmall($category, $name, &$imageContent = null)
+ * @method getBig($category, $name, &$imageContent = null)
+ * @method getOriginal($category, $name, &$imageContent = null)
  *
  * @author RuslanSaiko
  */

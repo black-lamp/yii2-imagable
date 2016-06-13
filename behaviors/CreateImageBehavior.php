@@ -61,17 +61,27 @@ class CreateImageBehavior extends Behavior
         //new image name created with class BaseName
         $imageName = $this->name->getName(FileHelper::getFileName($path));
         DirectoryHelper::create($newPath, true);
-
         $image = '';
         //TODO:refactor here!
         foreach ($categoriesParam['category'] as $category) {
             if (isset($category['origin']) && $category['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
-                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+                list($width, $height, $type, $attr) = getimagesize($path);
+                
+                $this->imageCreator->thumbnail($path, $width, $height);
+                $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+                
+//                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
 
             } elseif (isset($categoriesParam['origin']) && $categoriesParam['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
-                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+
+                list($width, $height, $type, $attr) = getimagesize($path);
+
+                $this->imageCreator->thumbnail($path, $width, $height);
+                $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+                
+//                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
             }
 
             $arr = isset($category['size']) ? array_merge($defaultCategoriesSize, $category['size']) : $defaultCategoriesSize;

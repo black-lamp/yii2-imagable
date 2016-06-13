@@ -42,5 +42,4 @@ class CreateImageImagine extends Object implements CreateImageInterface
             \Codeception\Util\Debug::debug($ex->getMessage());
         }
     }
-
 }

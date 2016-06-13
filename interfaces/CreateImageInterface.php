@@ -2,9 +2,10 @@
 
 namespace bl\imagable\interfaces;
 
+
 /**
- *
- * @author RuslanSaiko
+ * Interface CreateImageInterface
+ * @package bl\imagable\interfaces
  */
 interface CreateImageInterface
 {
@@ -12,5 +13,4 @@ interface CreateImageInterface
     public function thumbnail($pathToImage, $width, $height);
 
     public function save($saveTo);
-
 }
