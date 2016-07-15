@@ -84,7 +84,7 @@ class CreateImageBehavior extends Behavior
 //                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
             }
 
-            $arr = isset($category['size']) ? array_merge($defaultCategoriesSize, $category['size']) : $defaultCategoriesSize;
+            $arr = isset($category['size']) ? $category['size'] : $defaultCategoriesSize;
             foreach ($arr as $sizeName => $size) {
                 $image = $imageName . "-$sizeName." . FileHelper::getFileType($path);
                 $this->imageCreator->thumbnail($path, $size['width'], $size['height']);
