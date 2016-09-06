@@ -42,7 +42,7 @@ After extension is installed you need to setup imagable application component:
 ```php
 $imageName = \Yii::$app->imagable->create('avatars', 'pathToImage');
 // Or
-
+$imageName = \Yii::$app->imagable->createMultiply(['avatars', 'galery/more'], 'pathToImage');
 ```
 
 ###Get Image
