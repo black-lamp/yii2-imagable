@@ -9,6 +9,7 @@ use yii\base\Component;
  * Description of Imagable
  *
  * @method create($category, $path)
+ * @method createMultiply(array $categories, $path)
  *
  * @method get($category, $type, $name, &$imageContent = null)
  * @method getThumb($category, $name, &$imageContent = null)

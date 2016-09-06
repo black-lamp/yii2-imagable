@@ -51,11 +51,31 @@ class CreateImageBehavior extends Behavior
     }
 
     /**
-     * @param $category string category name
-     * @param $path string path to image
+     * @param string $category category name
+     * @param string $path path to image
      * @return string return image name
      */
     public function create($category, $path)
+    {
+        $imageName = $this->name->getName(FileHelper::getFileName($path));
+        $this->saveImageInCategory($category, $path, $imageName);
+        return $imageName;
+    }
+
+    /**
+     * @param array $categories
+     * @param string $path
+     */
+    public function createMultiply(array $categories, $path)
+    {
+        $imageName = $this->name->getName(FileHelper::getFileName($path));
+        foreach ($categories as $category) {
+            $this->saveImageInCategory($category, $path, $imageName);
+        }
+        return $imageName;
+    }
+
+    protected function saveImageInCategory($category, $path, $name)
     {
         // Path to image
         $saveImagePath = $this->owner->imagesPath;
@@ -73,18 +93,25 @@ class CreateImageBehavior extends Behavior
         $this->name->pathToCatory = $newPath;
 
         // New image name created with class BaseName
-        $imageName = $this->name->getName(FileHelper::getFileName($path));
+        $imageName = $name;
         DirectoryHelper::create($newPath, true);
         $image = '';
         $categoryOption = $categoryOptions['category'][$category];
-        
+
         $categorySizes = $categoryOption['size'];
-        if(empty($categorySizes)) {
+        if (empty($categorySizes)) {
             $categorySizes = $defaultCategoriesSize;
         }
-        if ((isset($categoryOption['origin']) && $categoryOption['origin'])
-            || (isset($categoryOptions['origin']) && $categoryOptions['origin'])
-        ) {
+        $saveOrigin = false;
+        if (isset($categoryOptions['origin'])) {
+            $saveOrigin = $categoryOptions['origin'];
+        }
+
+        if (isset($categoryOption['origin'])) {
+            $saveOrigin = $categoryOption['origin'];
+        }
+
+        if ($saveOrigin) {
             list($width, $height) = getimagesize($path);
             $categorySizes['origin'] = [
                 'width' => $width,
@@ -100,5 +127,4 @@ class CreateImageBehavior extends Behavior
 
         return $imageName;
     }
-
 }

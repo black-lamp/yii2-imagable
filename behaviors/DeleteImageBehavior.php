@@ -21,8 +21,8 @@ class DeleteImageBehavior extends Behavior
     }
 
     /**
-     * @param $category string image category
-     * @param $name image name
+     * @param string $category image category
+     * @param string $name image name
      * @return bool return true if all file deleted
      */
     public function delete($category, $name)

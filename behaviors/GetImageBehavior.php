@@ -27,9 +27,9 @@ class GetImageBehavior extends Behavior
 
     /**
      * Get the image in a $type size.
-     * @param $category string image category
-     * @param $type string image type. Example 'thumb'
-     * @param $name string image name
+     * @param string $category image category
+     * @param string $type image type. Example 'thumb'
+     * @param string $name image name
      * @return bool|string return name or false if image not exist
      */
     public function get($category, $type, $name)
@@ -48,8 +48,8 @@ class GetImageBehavior extends Behavior
 
     /**
      * Get the image in a thumb size.
-     * @param $category string image category
-     * @param $name string image name
+     * @param string $category image category
+     * @param string $name image name
      * @return bool|string return name or false if image not exist
      */
     public function getThumb($category, $name)
@@ -59,8 +59,8 @@ class GetImageBehavior extends Behavior
 
     /**
      * Get the image in a small size.
-     * @param $category string image category
-     * @param $name string image name
+     * @param string $category image category
+     * @param string $name image name
      * @return bool|string return name or false if image not exist
      */
     public function getSmall($category, $name)
@@ -70,8 +70,8 @@ class GetImageBehavior extends Behavior
 
     /**
      * Get the image in a big size.
-     * @param $category string image category
-     * @param $name string image name
+     * @param string $category image category
+     * @param string $name image name
      * @return bool|string return name or false if image not exist
      */
     public function getBig($category, $name)
@@ -81,9 +81,8 @@ class GetImageBehavior extends Behavior
 
     /**
      * Get the image in a original size.
-     * @param $category string image category
-     * @param $name string image name
-     * @param $imageContent string image contnent
+     * @param string $category image category
+     * @param string $name image name
      * @return bool|string return name or false if image not exist
      */
     public function getOriginal($category, $name)
