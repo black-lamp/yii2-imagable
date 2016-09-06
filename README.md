@@ -1,8 +1,13 @@
 #Instalation
-``` json 
+```
 php composer.phar install black-lamp/yii2-imagable
 ```
+or add
 
+```json
+"black-lamp/yii2-imagable": "*"
+```
+to the `require` section of your composer.json.
 #Confiugation
 After extension is installed you need to setup imagable application component:
 ```php
@@ -14,6 +19,9 @@ After extension is installed you need to setup imagable application component:
         'category' => [
             'galery' => [
                 'origin' => true,
+            ],
+            'galery/more' => [
+                'origin' => false,
             ],
             'avatars' => [
                 'size' => [
@@ -29,10 +37,18 @@ After extension is installed you need to setup imagable application component:
 ```
 
 #Usage
+
+###Create image
 ```php
 $imageName = \Yii::$app->imagable->create('avatars', 'pathToImage');
-/*
-    your code
-*/
-\Yii::$app->imagable->get('avatars', 'big', $imageName);
+```
+
+###Get Image
+```php
+$fullPathToImage = \Yii::$app->imagable->get('avatars', 'big', $imageName);
+```
+
+###Delete Image
+```php
+$isDeleted = \Yii::$app->imagable->delete('avatars', $imageName);
 ```
