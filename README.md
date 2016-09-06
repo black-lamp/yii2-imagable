@@ -1,5 +1,9 @@
-# yii2-imagable
+#Instalation
+``` json 
+php composer.phar install black-lamp/yii2-imagable
+```
 
+#Confiugation
 After extension is installed you need to setup imagable application component:
 ```php
 'imagable' => [
@@ -22,4 +26,13 @@ After extension is installed you need to setup imagable application component:
         ]
     ]
     ...
+```
+
+#Usage
+```php
+$imageName = \Yii::$app->imagable->create('avatars', 'pathToImage');
+/*
+    your code
+*/
+\Yii::$app->imagable->get('avatars', 'big', $imageName);
 ```

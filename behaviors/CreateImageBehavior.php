@@ -2,11 +2,13 @@
 
 namespace bl\imagable\behaviors;
 
+use bl\imagable\BaseImagable;
 use bl\imagable\helpers\FileHelper;
 use bl\imagable\name\BaseName;
 use bl\imagable\helpers\DirectoryHelper;
 use bl\imagable\interfaces\CreateImageInterface;
 use yii\base\Behavior;
+use yii\base\Exception;
 
 /**
  * Description of CreateImageBehavior
@@ -15,7 +17,6 @@ use yii\base\Behavior;
  */
 class CreateImageBehavior extends Behavior
 {
-
     /**
      * @var BaseHashName
      */
@@ -32,13 +33,21 @@ class CreateImageBehavior extends Behavior
      * @param CreateImageInterface $imageCreator image resizer
      * @param array $config
      */
-    public function __construct(BaseName $name,
-                                CreateImageInterface $imageCreator, $config = array())
+    public function __construct(BaseName $name, CreateImageInterface $imageCreator, $config = array())
     {
         parent::__construct($config);
 
         $this->name = $name;
         $this->imageCreator = $imageCreator;
+    }
+
+    /** @inheritdoc */
+    public function attach($owner)
+    {
+        if (!is_subclass_of($owner, BaseImagable::className())) {
+            throw new Exception("The owner must be inherited from " . BaseImagable::className());
+        }
+        parent::attach($owner);
     }
 
     /**
@@ -67,11 +76,10 @@ class CreateImageBehavior extends Behavior
             if (isset($category['origin']) && $category['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
                 list($width, $height, $type, $attr) = getimagesize($path);
-                
+
                 $this->imageCreator->thumbnail($path, $width, $height);
                 $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-                
-//                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+
 
             } elseif (isset($categoriesParam['origin']) && $categoriesParam['origin']) {
                 $image = $imageName . "-origin." . FileHelper::getFileType($path);
@@ -80,13 +88,12 @@ class CreateImageBehavior extends Behavior
 
                 $this->imageCreator->thumbnail($path, $width, $height);
                 $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-                
-//                copy($path, implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
+
             }
 
             $arr = isset($category['size']) ? $category['size'] : $defaultCategoriesSize;
             foreach ($arr as $sizeName => $size) {
-                $image = $imageName . "-$sizeName." . FileHelper::getFileType($path);
+                $image = "$imageName-$sizeName." . FileHelper::getFileType($path);
                 $this->imageCreator->thumbnail($path, $size['width'], $size['height']);
                 $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
             }
