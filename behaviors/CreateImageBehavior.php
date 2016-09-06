@@ -13,7 +13,7 @@ use yii\base\Exception;
 /**
  * Description of CreateImageBehavior
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class CreateImageBehavior extends Behavior
 {
@@ -57,46 +57,45 @@ class CreateImageBehavior extends Behavior
      */
     public function create($category, $path)
     {
-        //path to image
+        // Path to image
         $saveImagePath = $this->owner->imagesPath;
-        $categoriesParam = $this->owner->categories;
+
+        $categoryOptions = $this->owner->categories;
+
         $defaultCategoriesSize = $this->owner->baseTemplate;
-        if (!array_key_exists($category, $categoriesParam['category'])) {
-            throw new \UnexpectedValueException("$category not declare");
+        if (!array_key_exists($category, $categoryOptions['category'])) {
+            throw new \UnexpectedValueException(" Category with name $category not specified.");
         }
-        //new path to image
+        // New path to image
         $newPath = implode(DIRECTORY_SEPARATOR, [$saveImagePath, $category]);
 
-        //new image name created with class BaseName
+        // Specifies the full path to the category, for the derived class from BaseName
+        $this->name->pathToCatory = $newPath;
+
+        // New image name created with class BaseName
         $imageName = $this->name->getName(FileHelper::getFileName($path));
         DirectoryHelper::create($newPath, true);
         $image = '';
-        //TODO:refactor here!
-        foreach ($categoriesParam['category'] as $category) {
-            if (isset($category['origin']) && $category['origin']) {
-                $image = $imageName . "-origin." . FileHelper::getFileType($path);
-                list($width, $height, $type, $attr) = getimagesize($path);
+        $categoryOption = $categoryOptions['category'][$category];
+        
+        $categorySizes = $categoryOption['size'];
+        if(empty($categorySizes)) {
+            $categorySizes = $defaultCategoriesSize;
+        }
+        if ((isset($categoryOption['origin']) && $categoryOption['origin'])
+            || (isset($categoryOptions['origin']) && $categoryOptions['origin'])
+        ) {
+            list($width, $height) = getimagesize($path);
+            $categorySizes['origin'] = [
+                'width' => $width,
+                'height' => $height,
+            ];
+        }
 
-                $this->imageCreator->thumbnail($path, $width, $height);
-                $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-
-
-            } elseif (isset($categoriesParam['origin']) && $categoriesParam['origin']) {
-                $image = $imageName . "-origin." . FileHelper::getFileType($path);
-
-                list($width, $height, $type, $attr) = getimagesize($path);
-
-                $this->imageCreator->thumbnail($path, $width, $height);
-                $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-
-            }
-
-            $arr = isset($category['size']) ? $category['size'] : $defaultCategoriesSize;
-            foreach ($arr as $sizeName => $size) {
-                $image = "$imageName-$sizeName." . FileHelper::getFileType($path);
-                $this->imageCreator->thumbnail($path, $size['width'], $size['height']);
-                $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
-            }
+        foreach ($categorySizes as $sizeName => $size) {
+            $image = "$imageName-$sizeName." . FileHelper::getFileType($path);
+            $this->imageCreator->thumbnail($path, $size['width'], $size['height']);
+            $this->imageCreator->save(implode(DIRECTORY_SEPARATOR, [$newPath, $image]));
         }
 
         return $imageName;

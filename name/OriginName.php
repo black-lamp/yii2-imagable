@@ -9,7 +9,7 @@ namespace bl\imagable\name;
 /**
  * Description of OriginName
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class OriginName extends BaseName
 {

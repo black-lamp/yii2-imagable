@@ -8,7 +8,7 @@ use bl\imagable\helpers\base\BaseFileHelper;
 /**
  * Description of ImageHelper
  *
- * @author Ruslan
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class FileHelper extends BaseFileHelper {
     

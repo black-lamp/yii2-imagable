@@ -8,7 +8,7 @@ use yii\base\Object;
 /**
  * Description of ImageMakeThumb
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 abstract class ImageSizeChain extends Object
 {

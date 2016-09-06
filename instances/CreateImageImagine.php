@@ -9,7 +9,7 @@ use yii\imagine\Image;
 
 /**
  * Description of CreateImageImagine
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class CreateImageImagine extends Object implements CreateImageInterface
 {

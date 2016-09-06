@@ -5,7 +5,7 @@ namespace bl\imagable\name;
 /**
  * Description of CRC32Name
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class CRC32Name extends BaseName
 {

@@ -7,7 +7,7 @@ use yii\base\Object;
 /**
  * Description of BaseImageHelper
  *
- * @author Ruslan
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class BaseFileHelper extends \yii\helpers\BaseFileHelper {
     public static function fileInfo($filePath) {

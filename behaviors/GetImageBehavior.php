@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 /**
  * Description of GetImageBehavior
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class GetImageBehavior extends Behavior
 {

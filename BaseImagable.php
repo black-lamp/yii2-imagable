@@ -17,7 +17,7 @@ use yii\base\Component;
  * @method getOriginal($category, $name, &$imageContent = null)
  * @method delete($category, $name, &$imageContent = null)
  *
- * @author RuslanSaiko
+ * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
 class BaseImagable extends Component
 {
