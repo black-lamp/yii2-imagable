@@ -27,6 +27,7 @@ class BaseImagable extends Component
     public $imagesPath = '@webroot/images';
     public $baseTemplate = [];
     public $nameClass = 'bl\imagable\name\OriginName';
+    public $dataProvider = [];
 
     public function behaviors()
     {
