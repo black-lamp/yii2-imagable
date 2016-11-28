@@ -12,7 +12,7 @@ class CRC32Name extends BaseName
 
     public function generate($baseName)
     {
-        return hash('crc32', $baseName);
+        return uniqid(hash('crc32', $baseName));
     }
 
 }
