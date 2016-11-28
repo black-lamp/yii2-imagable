@@ -56,7 +56,7 @@ $isDeleted = \Yii::$app->imagable->delete('avatars', $imageName);
 ```
 
 
-###Delete Image
+###Data provider
 ```php
 //To action
 /** @var Imagable $image */
