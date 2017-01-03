@@ -38,7 +38,7 @@ class GetImageBehavior extends Behavior
         $directory = \Yii::getAlias($this->owner->imagesPath);
         $imagePath = implode(DIRECTORY_SEPARATOR, [$directory, $category]);
         $images = glob($imagePath . DIRECTORY_SEPARATOR . "$name-$type.*");
-        if ($images === false) {
+        if (empty($images)) {
             return false;
         }
         /* Get the first matched file. */
