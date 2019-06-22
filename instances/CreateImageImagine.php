@@ -4,14 +4,14 @@ namespace bl\imagable\instances;
 
 use bl\imagable\helpers\FileHelper;
 use bl\imagable\interfaces\CreateImageInterface;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\imagine\Image;
 
 /**
  * Description of CreateImageImagine
  * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
-class CreateImageImagine extends Object implements CreateImageInterface
+class CreateImageImagine extends BaseObject implements CreateImageInterface
 {
 
     private $imagine;

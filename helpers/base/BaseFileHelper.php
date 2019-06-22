@@ -2,8 +2,6 @@
 
 namespace bl\imagable\helpers\base;
 
-use yii\base\Object;
-
 /**
  * Description of BaseImageHelper
  *

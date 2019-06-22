@@ -7,7 +7,7 @@ namespace bl\imagable\name;
  *
  * @author Ruslan Saiko <ruslan.saiko.dev@gmail.com>
  */
-abstract class BaseName extends \yii\base\Object
+abstract class BaseName extends \yii\base\BaseObject
 {
     /**
      * @param $baseName string
